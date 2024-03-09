@@ -74,7 +74,7 @@ if __name__ == '__main__':
         '-mc', '--monte_carlo', default=30, type=int, help='number of mc runs',
     )
     parser.add_argument(
-        '-nw', '--num_workers', default=8, type=int,
+        '-nw', '--num_workers', default=2, type=int,
         help='number of workers to use in dataloader'
     )
     parser.add_argument(
