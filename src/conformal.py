@@ -84,7 +84,7 @@ def raps_predict(
             cumsum_ij = cumsum[i, j]
             ordered_ij = ordered[i, j]
             p = penalty_cumsum[0, j]
-            V[i] = 1 / ordered[i, j] * tau - (cumsum_i - ordered_i) - p
+            V[i] = 1 / ordered[i, j] * tau - (cumsum_ij - ordered_ij) - p
 
         sizes = sizes_base - (np.random.random(V.shape) >= V).astype(int)
     else:
@@ -114,7 +114,7 @@ def get_q_hat(calibration_scores, labels, alpha=0.05):
     cum_scores = values.cumsum(1).gather(1, indices.argsort(1))[range(n), labels]
     
     #  get quantile with small correction for finite sample sizes
-    q_hat = torch.quantile(cum_scores, np.ceil((n + 1) * (1 - alpha)) / n)
+    q_hat = np.quantile(cum_scores, np.ceil((n + 1) * (1 - alpha)) / n, interpolation='higher')
     
     return q_hat
 
