@@ -25,7 +25,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '-b', '--base',
         #default='/mnt/dfs/qtim/clu/data/mammo_density_dmist/',
-        default='/Users/tianhaoluo/DLH/final/AAAI-22/fritz17k',#'/Users/tianhaoluo/DLH/final/AAAI-22/images',
+        default='./images',
         help='path to image data directory',
     )
     parser.add_argument(
