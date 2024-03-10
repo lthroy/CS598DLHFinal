@@ -15,6 +15,9 @@ from utils import first
 from plot import plot_curve
 import resnet
 
+import zipfile
+import os
+
 if __name__ == '__main__':
     START = time.perf_counter()
     parser = argparse.ArgumentParser()
@@ -147,7 +150,13 @@ if __name__ == '__main__':
     logger.info(f'--- number validation: {len(valid_df)}')
     logger.info(f'--- number testing:    {len(test_df)}')
 
-    for rnd in range(2 if args.debug else args.runs):
+    low = high = None
+    if args.debug:
+        low = 0; high = 2
+    else:
+        low = args.runs; high = low+1
+    
+    for rnd in range(low,high):
         logger.info(f'-- Random state: {rnd}')
         rnd_dir = run_dir / f'seed_{rnd}'
         rnd_dir.mkdir(exist_ok=True, parents=True)
@@ -325,4 +334,6 @@ if __name__ == '__main__':
         )
 
     logger.info(f'=-=-= total runtime: {time.perf_counter() - START:.0f}s =-=-=')
+
+    
 
