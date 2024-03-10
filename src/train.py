@@ -49,7 +49,7 @@ if __name__ == '__main__':
         '-e', '--epochs', default=100, type=int, help='number of epochs to use',
     )
     parser.add_argument(
-        '-es', '--early_stop', default=30, type=int,
+        '-es', '--early_stop', default=20, type=int,
         help='patience for early stopping'
     )
     parser.add_argument(
@@ -279,8 +279,9 @@ if __name__ == '__main__':
             epoch_train_loss.append(train_loss)
             epoch_valid_loss.append(valid_loss)
 
-            logger.info(train_loss)
-            logger.info(valid_loss)
+            logger.info(f"Epoch={e+1} out of {args.epochs if not args.debug else 1}")
+            logger.info(f"train_loss={train_loss}")
+            logger.info(f"valid_loss={valid_loss}")
 
             if valid_loss < best_loss:
                 best_loss = valid_loss
