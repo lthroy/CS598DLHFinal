@@ -25,7 +25,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '-b', '--base',
         #default='/mnt/dfs/qtim/clu/data/mammo_density_dmist/',
-        default='./images',
+        default='./fritz17k',
         help='path to image data directory',
     )
     parser.add_argument(
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         '-c', '--csv',
         #default='/mnt/dfs/qtim/clu/data/mammo_density_dmist/dmist_info.csv',
         #default='/mnt/dfs/qtim/clu/data/skin/skin-info.csv',
-        default="/Users/tianhaoluo/DLH/final/AAAI-22/skin_info2.csv",#'/Users/tianhaoluo/DLH/final/AAAI-22/metadata_filled.csv',
+        default="./skin_info2.csv",#'/Users/tianhaoluo/DLH/final/AAAI-22/metadata_filled.csv',
         help='path to csv file',
     )
     parser.add_argument(
@@ -46,7 +46,7 @@ if __name__ == '__main__':
         '-dr', '--dropout_rate', default=0.1, type=float, help='rate of dropout probability',
     )
     parser.add_argument(
-        '-e', '--epochs', default=2, type=int, help='number of epochs to use',
+        '-e', '--epochs', default=20, type=int, help='number of epochs to use',
     )
     parser.add_argument(
         '-es', '--early_stop', default=5, type=int,
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         '-mc', '--monte_carlo', default=30, type=int, help='number of mc runs',
     )
     parser.add_argument(
-        '-nw', '--num_workers', default=8, type=int,
+        '-nw', '--num_workers', default=2, type=int,
         help='number of workers to use in dataloader'
     )
     parser.add_argument(
