@@ -46,10 +46,10 @@ if __name__ == '__main__':
         '-dr', '--dropout_rate', default=0.1, type=float, help='rate of dropout probability',
     )
     parser.add_argument(
-        '-e', '--epochs', default=20, type=int, help='number of epochs to use',
+        '-e', '--epochs', default=100, type=int, help='number of epochs to use',
     )
     parser.add_argument(
-        '-es', '--early_stop', default=5, type=int,
+        '-es', '--early_stop', default=30, type=int,
         help='patience for early stopping'
     )
     parser.add_argument(
@@ -94,7 +94,7 @@ if __name__ == '__main__':
         '-t', '--tag', default=None, help='append tag to output directory name'
     )
     parser.add_argument(
-        '-r', '--runs', default=10, type=int, help='number of runs'
+        '-r', '--runs', default=0, type=int, help='the seed you want to run'
     )
     args = parser.parse_args()
 
@@ -147,7 +147,12 @@ if __name__ == '__main__':
     logger.info(f'--- number validation: {len(valid_df)}')
     logger.info(f'--- number testing:    {len(test_df)}')
 
-    for rnd in range(2 if args.debug else args.runs):
+    if args.debug:
+        low = 0; high = 2
+    else:
+        low = args.runs; high = low+1
+    
+    for rnd in range(low,high):
         logger.info(f'-- Random state: {rnd}')
         rnd_dir = run_dir / f'seed_{rnd}'
         rnd_dir.mkdir(exist_ok=True, parents=True)
