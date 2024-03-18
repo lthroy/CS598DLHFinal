@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+% Remove paragraph indents
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+
+\setlength{\parindent}{0pt}
+\title{CS598 Deep Learning for Healthcare\\ Final Project Proposal}
+\author{Tianhao Luo\thanks{University of Illinois Urbana-Champaign, Email: tluo3@illinois.edu} \and Iris Fu\thanks{University of Illinois Urbana-Champaign, Email: xingfu2@illinois.edu}}
+\date{March 2024}
+
+
+\begin{document}
+%\vspace*{-10pt} % Adjust the value as needed
+\maketitle
+
+\section*{General Problem}
+Deep learning can automate many tasks in medical imaging. However, as discussed in the paper we are trying to reproduce (Lu et al. 2022)\cite{Lu_Lemay_Chang_Höbel_Kalpathy-Cramer_2022}, oftentimes we cannot simply use the label with the highest predicted probability produced by a deep learning model to make medical decisions because such probabilities are usually poorly calibrated, meaning that they don't quantify uncertainty well. Conformal predictions (Shaffer and Vonk,2008) \cite{shafer2008tutorial} can be used to form a prediction set that are "marginally correct"  90\% (or some other pre-specified level) of the time by just leveraging the uncalibrated probabilities from any model.
+
+\section*{Specific Approaches}
+\subsection*{1. Conformal predictions in general}
+Conformal predictions are model agnostic and provides results for $marginal$ $coverage$, defined as the average probability that the true class will appear in the prediction set. Formally
+
+
+$$1-\alpha \leq P(y_{n+1} \in \{y \in \mathcal{Y} | S(x_{n+1})_y > \hat{q})$$
+
+where $\alpha$ is some predetermined miscoverage level, $y_{n+1}$ is the true label of an unseen data point, $\mathcal{Y}$ is the prediction set, $x_{n+1}$ is the unseen test example(e.g. a new image), $S(x_{n+1})_y$ is the $y$th index of an output score, $\hat{q}$ is the threshold estimated from the $\{(x_i,y_i),i=1,\cdots,n\}$ to achieve proper coverage at the desired level (in this case $1-\alpha$).\\
+
+For example, instead of outputting the class with the highest probability, e.g. ("basal cell carcinoma",0.51), a conformal prediction with miscoverage level of $0.1$ can be something like \{("basal cell carcinoma",0.51),("squamous cell carcinoma", 0.27), ("seborrheic keratosis", 0.13)\}. For specific algorithms to find the thresholds and forming the prediction set, one can refer to this tutorial \cite{angelopoulos2021gentle}.
+
+\subsection*{2. Data}
+The author used Fitzpatrick 17k data, which can be found \href{https://github.com/mattgroh/fitzpatrick17k}{here}, is an aggregation of $16,577$ photography images.\\
+
+The labels have two hierarchies: 11 labels are classified as "critical" and the other 103 labels are classified as "non-critical". Also, for each image, we have the fitzpatrick skin type (6 types), which will be used to form subgroups in the study.\\
+
+For medical purposes, doctors often want to "rule-in"(people with diseases should be diagnosed as "need treatment") or "rule-out"(people without diseases should be diagnosed as "okay") specific medical conditions to make decisions.
+For the "rule-in" scenario, we only care about among the "critical" cases (true label is one of the 11 "critical" classes), how many of the images' prediction set contains one of the 11 classes. For "rule-out" scenario, we only consider the images whose true label is the other 103 cases and how many of the images' prediction set does not have any of the 11 "critical" labels. 
+\subsection*{3. Specific conformal algorithms}
+The author applied 4 methods: a non-conformal baseline (Naive), adaptive prediction sets (APS), regularized adaptize prediction sets (RAPS), group adaptive prediction sets (GAPS) and group regularized adaptive prediction sets (GRAPS).\\
+\subsection*{4. Evaluation metrics}
+The author used two evaluation metrics: marginal coverage (the number of times true class is contained in the prediction set) and set size (the average number of elements in prediction set) for given miscoverage parameter $\alpha$.
+
+
+
+\section*{Hypotheses to be tested}
+While the authors do not have specific hypotheses, they intend to investigate the following questions:
+\begin{enumerate}
+    \item How do different method compare in \textit{rule-in} and \textit{rule-out} use cases for malignant skin lesion classification
+    \item How do group conformal predictors compare with aggregate predictors conditioned on skin type as the group attribute
+    \item  What is the relationship between prediction set size and epistemic uncertainty( e.g. predictive entropy, which is the average entropy over $T$ samples and $K$
+classes)
+\end{enumerate}
+
+\section*{Ablation studies}
+We plan to compare the performance of the "naive" approach against APS, RAPS, GAPS, GRAPS, which the authors have done and we plan to reproduce.
+
+\section*{Data access}
+The data we use is the \href{https://github.com/mattgroh/fitzpatrick17k}{Fitzpatrick 17k data}. There is an URL column in the csv file provided in the repo and the images can be downloaded with the help of the python's $request$ library.
+
+\section*{Feasibility of computation}
+The authors used ResNet18 to train the image classification algorithm with 5 seeds (with 5 different initiations). They trained with A100 GPU and finished all 5 seeds within 10 hours. We tested this on a Mac Mini (2020, M1 Chip, 8GB RAM) and one seed takes around 6 hours, with a little tweak of the \textit{early stopping} hyperparameter. While this is not ideal, it is manageable.\\
+
+Everything else does not take long to compute.
+
+\section*{Usage of existing code}
+We plan to the author's code (\href{https://github.com/clu5/AAAI-22/tree/main}{here}) with minor modifications as needed. 
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{papers} % Assumes your .bib file is named references.bib
+
+\end{document}
