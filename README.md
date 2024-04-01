@@ -1,26 +1,58 @@
-# Fair Conformal Predictors for Applications in Medical Imaging
+# Steps
 
-> Deep learning has the potential to automate many clinically useful tasks in medical imaging. However translation of deep learning into clinical practice has been hindered by issues such as lack of the transparency and interpretability in these "black box" algorithms compared to traditional statistical methods. Specifically, many clinical deep learning models lack rigorous and robust techniques for conveying certainty (or lack thereof) in their predictions -- ultimately limiting their appeal for extensive use in medical decision-making. Furthermore, numerous demonstrations of algorithmic bias have increased hesitancy towards deployment of deep learning for clinical applications. To this end, we explore how conformal predictions can complement existing deep learning approaches by providing an intuitive way of expressing uncertainty while facilitating greater transparency to clinical users. In this paper, we conduct field interviews with radiologists to assess possible use-cases for conformal predictors. Using insights gathered from these interviews, we devise two clinical use-cases and empirically evaluate several methods of conformal predictions on a dermatology photography dataset for skin lesion classification. We show how to modify conformal predictions to be more adaptive to subgroup differences in patient skin tones through equalized coverage. Finally, we compare conformal prediction against measures of epistemic uncertainty.
+0. Make sure you python3 version is 3.8
 
-Published in AAAI 2022 -- https://ojs.aaai.org/index.php/AAAI/article/view/21459
-
-* [Tutorial on conformal prediction](http://people.eecs.berkeley.edu/~angelopoulos/blog/posts/gentle-intro/)
-* [Dataset](https://github.com/mattgroh/fitzpatrick17k)
-* [Paper](https://arxiv.org/abs/2109.04392)
-* [Predictions/weights](https://drive.google.com/drive/folders/1b15L8UM09ByeqqrXfW_UXxl3sQfNts5J?usp=share_link)
-
-Please cite our work as
+1. Clone this repo. 
 ```
-@article{Lu_Lemay_Chang_Höbel_Kalpathy-Cramer_2022, 
-title={Fair Conformal Predictors for Applications in Medical Imaging}, 
-volume={36}, 
-url={https://ojs.aaai.org/index.php/AAAI/article/view/21459}, 
-DOI={10.1609/aaai.v36i11.21459}, 
-number={11}, 
-journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
-author={Lu, Charles and Lemay, Andréanne and Chang, Ken and Höbel, Katharina and Kalpathy-Cramer, Jayashree}, 
-year={2022}, 
-month={Jun.}, 
-pages={12008-12016} 
-}
+git clone https://github.com/lthroy/CS598DLHFinal.git
 ```
+
+2. Download the data
+https://drive.google.com/file/d/18wvJGDnAlhSRov3Z2ShVwjPy-_EGN22Q/view?usp=drive_link
+
+Download and unzip such that the folder "fritz17k" is under the folder "CS598DLHFinal"
+
+3. Download the training results
+
+link TBD
+
+Again, unzip such that the folder "run_result" is under the folder "CS598DLHFinal"
+
+4. Run
+```
+pip install -r requirements.txt
+```
+
+5. Your folder structure should look like
+
+
+Creating a folder structure in your README.md file can greatly improve the navigability and understanding of your project for others. Below is a guide on how to represent a folder structure and some tips on what to include in your README.md to make your project more user-friendly.
+
+Representing Folder Structure
+You can represent your project's folder structure in a README.md file using a tree-like format. Here's an example of how to do it:
+
+```
+CS598DLHFinal/
+│
+├── README.md
+│
+├── src/
+│ 
+│
+├── fritz17k/
+│   ├── test_module1.py
+│   └── test_module2.py
+│
+├── docs/
+│   └── project_documentation.md
+│
+├── requirements.txt
+│
+├── skin_info2.csv
+│
+└── fitz.ipynb
+```
+
+6. Run ./fitz.ipynb
+
+
