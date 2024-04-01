@@ -28,11 +28,6 @@ pip install -r requirements.txt
 5. Your folder structure should look like
 
 
-Creating a folder structure in your README.md file can greatly improve the navigability and understanding of your project for others. Below is a guide on how to represent a folder structure and some tips on what to include in your README.md to make your project more user-friendly.
-
-Representing Folder Structure
-You can represent your project's folder structure in a README.md file using a tree-like format. Here's an example of how to do it:
-
 ```
 CS598DLHFinal/
 │
