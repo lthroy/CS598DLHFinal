@@ -14,7 +14,9 @@ Download and unzip such that the folder "fritz17k" is under the folder "CS598DLH
 
 3. Download the training results
 
-link TBD
+https://drive.google.com/drive/folders/1paF6XRpFotOmCrJ4izckNVXGl9q93bRI?usp=drive_link
+
+If too large, you can just download test_dfs.pickle and valid_dfs.pickle
 
 Again, unzip such that the folder "run_result" is under the folder "CS598DLHFinal"
 
@@ -40,12 +42,15 @@ CS598DLHFinal/
 │ 
 │
 ├── fritz17k/
-│   ├── test_module1.py
-│   └── test_module2.py
+│   
 │
-├── docs/
-│   └── project_documentation.md
-│
+├── run_result/
+|   |── valid_dfs.pickle
+|   └── test_dfs.pickle
+|   |--- ...
+|
+|
+|
 ├── requirements.txt
 │
 ├── skin_info2.csv
