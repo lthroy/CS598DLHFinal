@@ -24,6 +24,7 @@ Again, unzip such that the folder "run_result" is under the folder "CS598DLHFina
 ```
 pip install -r requirements.txt
 ```
+If any of the installations failed, try running the pip install command with the requirements_lock.txt `pip install -r requirements.txt`.
 
 5. Your folder structure should look like
 
