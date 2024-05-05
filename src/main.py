@@ -3,7 +3,8 @@ import pathlib
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import json
+import torch
 
 def get_reduce(func):
     def wrapper(*args, **kws):
@@ -89,7 +90,7 @@ def conformal_inference(scores, q_hat):
     return [x.tolist() for x in confidence_sets]
 
 if __name__ == '__main__':
-    run_dir = pathlib.Path('/Users/charles.lu/AAAI/fitz/')
+    run_dir = pathlib.Path('./run_result')
     k = 0
     res = json.load(open(run_dir / f'seed_{k}' / 'test-res.json'))
     df = pd.DataFrame(list(map(parse, res.values())))
