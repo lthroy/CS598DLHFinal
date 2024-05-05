@@ -47,3 +47,13 @@ CS598DLHFinal/
 ```
 
 6. Launch jupyter notebook and run fitz.ipynb
+
+## Code Locations
+### Training Code
+`./src/train.py`
+### Evaluation Code
+Code under `src` folder, `main.py` with code from `metrics.py`, `platt.py`, `uncertainty.py` and `conformal.py`
+### Pre-trained models
+Available in the `run_result` folder.
+## Table of Results
+For detailed results, please refer to fitz.ipynb.
